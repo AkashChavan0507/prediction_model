@@ -1,0 +1,39 @@
+﻿Model Architecture and Hyperparameter Documentation
+Model Overview
+Our implementation features a deep sequential neural network specifically designed for time series analysis. At its core, we've developed a multi-layer LSTM architecture that processes sequential data through increasingly complex representations.
+Network Architecture Details
+Core Components
+The network processes input sequences with dimensions (sequence_length, 1) through the following structure:
+LSTM Layer Configuration
+We implement a progressive depth approach with four LSTM layers:
+* Initial layer: 50 processing units using ReLU activation, maintaining sequence output.
+* Second stage: 60 units with ReLU, sequence preservation enabled.
+* Third stage: 80 units with ReLU, continuing sequence processing.
+* Final LSTM stage: 120 units with ReLU, producing a single output state.
+Regularization Strategy
+To enhance model generalization, we incorporate dropout mechanisms (20% rate) following each LSTM layer. This helps prevent the network from becoming overly dependent on specific neural pathways.
+Output Processing
+The final stage consists of a single dense neuron that generates continuous predictions.
+Alternative Configuration
+We've developed an alternative version incorporating batch normalization and additional dense layers, currently maintained as a backup architecture for experimental comparison.
+Hyperparameter Selection
+Training Configuration
+* Optimization: We employ the Adam optimizer with a 0.001 learning rate, selected for its momentum-based approach to weight updates.
+* Loss Metric: Mean Squared Error (MSE) serves as our primary optimization target, particularly effective for regression objectives.
+* Performance Tracking: Mean Absolute Error (MAE) provides a clear interpretation of prediction deviations.
+* Training Cycles: 50 epochs balance training depth with computational efficiency.
+* Mini-batch Size: 32 samples per batch optimize memory usage and training dynamics.
+Design Rationale
+Our architectural decisions were guided by several key principles:
+1. Deep LSTM Structure
+* Enables capture of complex temporal patterns.
+* Progressive layer sizing allows hierarchical feature learning.
+2. Regularization Approach
+* Dropout layers maintain model generalization.
+* Prevents overspecialization to training data.
+3. Optimization Strategy
+* Adam's adaptive learning mechanics support stable convergence.
+* Batch size selection balances resource utilization and learning stability.
+4. Error Measurement
+* MSE provides appropriate penalty scaling for prediction errors.
+* Squared error term ensures focus on reducing large deviations.
